@@ -1,0 +1,59 @@
+use alohomora::pcr::{PrivacyCriticalRegion, Signature};
+
+fn hash_eq(){
+    let _pcr = PrivacyCriticalRegion::new(|x: u8| { x + 2 },
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUN2UGRFcEtqMjVvbmxQUktUbVpwU0NZd3Zsb1JaZUZZOHRtM1A5M0pKR0V1WnhsNXRnQ2x3cytHRlVjTEF6U1oKZnpQQjQwaElMTUowV2x4V0lTQUhNSQotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUN2UGRFcEtqMjVvbmxQUktUbVpwU0NZd3Zsb1JaZUZZOHRtM1A5M0pKR0V1WnhsNXRnQ2x3cytHRlVjTEF6U1oKZnpQQjQwaElMTUowV2x4V0lTQUhNSQotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+
+    let _pcr2 = PrivacyCriticalRegion::new(|x: u8| { 2 + x },
+        Signature {username: "corinnt", 
+            signature: ""}, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUJtY2NZNUtrbU5wbFBMb3BZMmJSb2phV0UyVk9jVkdxeEdWSlA3YVQ3Y2tRMEtYZ2djN2lMRnZsT3dqdXFLZWYKeFFwQS9CL0RwcFl5VlE4NCt5SGJrTwotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+
+    let _pcr3 = PrivacyCriticalRegion::new(|x: u8| { x + 3 - 1 },
+        Signature {username: "corinnt", 
+            signature: ""}, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRURZeGwxOWV0SDc4ZE9wUVIvRnA5OUpXdEYxSERFU2JmbXRIV3JoM2hQNmlLZmlyS1hpNDl6S2lEcXlsMnpRTGEKY1cxa3VXc2JzVGhuSWRTU1BmSGRvTwotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+}
+
+fn loops(){
+    let _pcr = PrivacyCriticalRegion::new(
+        |mut x: u8| { 
+            let mut i = 0; 
+            while i < 10 {
+                x += 1; 
+                i += 1; 
+            }
+            x 
+        },
+        Signature {username: "corinnt", 
+            signature: ""}, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUNwNXpzZzRvRU1ORGs3R2ZQeWthTUNNNUdUL3pOMG9OVmVVWmV2dklYUkw5b29sZ0FSY0o1TFQvZDM3U0R6UUkKUW5nK2lRUHk3MTVENjZSWXJzYkpvSwotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+
+    let _pcr2 = PrivacyCriticalRegion::new(
+        |mut x: u8| { 
+            for _i in 0..10 {
+                x += 1; 
+            }
+            x
+        }, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUFDbkJkTTQwa1FRTTk5cWptbXg3SUNCek9wM3BrNnNyMWhXajZJRUE2WXZnSGNDa0FnWnhLdm9IVFkzSzg3WlcKUHBPdFQrcFVaKytsWnNmTkhObUxBQQotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}, 
+        Signature {username: "corinnt", 
+            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUFDbkJkTTQwa1FRTTk5cWptbXg3SUNCek9wM3BrNnNyMWhXajZJRUE2WXZnSGNDa0FnWnhLdm9IVFkzSzg3WlcKUHBPdFQrcFVaKytsWnNmTkhObUxBQQotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+}
+
+fn main(){
+    let _pcr = PrivacyCriticalRegion::new(|x: u8| { x + 2 },
+         Signature {username: "corinnt", 
+                            signature: ""}, 
+        Signature {username: "corinnt", 
+                            signature: "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWd6dGJjeE9zVzlOL09Fd2c3Y3BKZ3dUQnFMNgpGazI2ZVB2Rm1ZaXpRRjM1VUFBQUFFWm1sc1pRQUFBQUFBQUFBR2MyaGhOVEV5QUFBQVV3QUFBQXR6YzJndFpXUXlOVFV4Ck9RQUFBRUN5WDVqV3ZXMkg0dmFuQnFETmV3UFYvakNhdHdBVi9jbWk1QVdEUm81R1NWUkxFOEU2TEV6QWczdmRvQ0ZCaGYKRzIxZXBaKzlvZ2FLQklITXBLM0hVTAotLS0tLUVORCBTU0ggU0lHTkFUVVJFLS0tLS0K"}); 
+    loops(); 
+    hash_eq(); 
+}

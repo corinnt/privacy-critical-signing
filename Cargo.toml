@@ -1,0 +1,3 @@
+[workspace]
+members = ["signature-lint"]
+exclude = ["alohomora", "tests"]
